@@ -19,7 +19,7 @@ public class WeatherContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     // Possible paths.
-    public static final String PATH_CURRENT_FORECAST = "current_forecast";
+    public static final String PATH_CURRENT_WEATHER = "current_weather";
     public static final String PATH_LOCATION = "location";
 
     // To make it easy to query for the exact date, we normalize all dates that go into
@@ -64,15 +64,15 @@ public class WeatherContract {
         }
     }
 
-    public static final class CurrentForecastEntry implements BaseColumns {
+    public static final class CurrentWeatherEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_CURRENT_FORECAST).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_CURRENT_WEATHER).build();
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CURRENT_FORECAST;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CURRENT_WEATHER;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CURRENT_FORECAST;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CURRENT_WEATHER;
 
         public static final String TABLE_NAME = "current_forecast";
 

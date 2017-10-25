@@ -6,41 +6,63 @@
     android:orientation="vertical"
     tools:context="com.twny.tonyn.weatherapp.ForecastFragment">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/forecast_appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/forecast_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#fff"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/location_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="75dp"
             tools:text="Hollywood"/>
 
         <TextView
-            android:id="@+id/current_temperature"
+            android:id="@+id/data_error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="50sp"
-            tools:text="75"/>
+            android:text="@string/data_error"/>
 
-        <TextView
-            android:id="@+id/main_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:text="Rainy"/>
+        <!--<TextView-->
+            <!--android:id="@+id/current_temperature"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="50sp"-->
+            <!--android:textStyle="bold"-->
+            <!--tools:text="75"/>-->
 
-        <ImageView
-            android:id="@+id/weather_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:src="@drawable/art_rain"/>
+        <!--<TextView-->
+            <!--android:id="@+id/main_description"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--tools:text="Rainy"/>-->
 
-    </LinearLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/weather_icon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--tools:src="@drawable/art_rain"/>-->
+
+    </FrameLayout>
 
 </LinearLayout>

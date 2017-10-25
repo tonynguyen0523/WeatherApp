@@ -32,10 +32,10 @@ public class WeatherProvider extends ContentProvider {
         //This is an inner join which looks like
         //weather INNER JOIN location ON weather.location_id = location._id
         sWeatherByLocationSettingQueryBuilder.setTables(
-                WeatherContract.CurrentForecastEntry.TABLE_NAME + " INNER JOIN " +
+                WeatherContract.CurrentWeatherEntry.TABLE_NAME + " INNER JOIN " +
                         WeatherContract.LocationEntry.TABLE_NAME +
-                        " ON " + WeatherContract.CurrentForecastEntry.TABLE_NAME +
-                        "." + WeatherContract.CurrentForecastEntry.COLUMN_LOC_KEY +
+                        " ON " + WeatherContract.CurrentWeatherEntry.TABLE_NAME +
+                        "." + WeatherContract.CurrentWeatherEntry.COLUMN_LOC_KEY +
                         " = " + WeatherContract.LocationEntry.TABLE_NAME +
                         "." + WeatherContract.LocationEntry._ID);
     }
@@ -49,17 +49,17 @@ public class WeatherProvider extends ContentProvider {
     private static final String sLocationSettingWithStartDateSelection =
             WeatherContract.LocationEntry.TABLE_NAME+
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
-                    WeatherContract.CurrentForecastEntry.COLUMN_DATE + " >= ? ";
+                    WeatherContract.CurrentWeatherEntry.COLUMN_DATE + " >= ? ";
 
     //location.location_setting = ? AND date = ?
     private static final String sLocationSettingAndDaySelection =
             WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
-                    WeatherContract.CurrentForecastEntry.COLUMN_DATE + " = ? ";
+                    WeatherContract.CurrentWeatherEntry.COLUMN_DATE + " = ? ";
 
     private Cursor getWeatherByLocationSetting(Uri uri, String[] projection, String sortOrder) {
-        String locationSetting = WeatherContract.CurrentForecastEntry.getLocationSettingFromUri(uri);
-        long startDate = WeatherContract.CurrentForecastEntry.getStartDateFromUri(uri);
+        String locationSetting = WeatherContract.CurrentWeatherEntry.getLocationSettingFromUri(uri);
+        long startDate = WeatherContract.CurrentWeatherEntry.getStartDateFromUri(uri);
 
         String[] selectionArgs;
         String selection;
@@ -84,8 +84,8 @@ public class WeatherProvider extends ContentProvider {
 
     private Cursor getWeatherByLocationSettingAndDate(
             Uri uri, String[] projection, String sortOrder) {
-        String locationSetting = WeatherContract.CurrentForecastEntry.getLocationSettingFromUri(uri);
-        long date = WeatherContract.CurrentForecastEntry.getDateFromUri(uri);
+        String locationSetting = WeatherContract.CurrentWeatherEntry.getLocationSettingFromUri(uri);
+        long date = WeatherContract.CurrentWeatherEntry.getDateFromUri(uri);
 
         return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
@@ -114,9 +114,9 @@ public class WeatherProvider extends ContentProvider {
         final String authority = WeatherContract.CONTENT_AUTHORITY;
 
         // For each type of URI you want to add, create a corresponding code.
-        matcher.addURI(authority, WeatherContract.PATH_CURRENT_FORECAST, WEATHER);
-        matcher.addURI(authority, WeatherContract.PATH_CURRENT_FORECAST + "/*", WEATHER_WITH_LOCATION);
-        matcher.addURI(authority, WeatherContract.PATH_CURRENT_FORECAST + "/*/#", WEATHER_WITH_LOCATION_AND_DATE);
+        matcher.addURI(authority, WeatherContract.PATH_CURRENT_WEATHER, WEATHER);
+        matcher.addURI(authority, WeatherContract.PATH_CURRENT_WEATHER + "/*", WEATHER_WITH_LOCATION);
+        matcher.addURI(authority, WeatherContract.PATH_CURRENT_WEATHER + "/*/#", WEATHER_WITH_LOCATION_AND_DATE);
 
         matcher.addURI(authority, WeatherContract.PATH_LOCATION, LOCATION);
         return matcher;
@@ -146,11 +146,11 @@ public class WeatherProvider extends ContentProvider {
         switch (match) {
             // Student: Uncomment and fill out these two cases
             case WEATHER_WITH_LOCATION_AND_DATE:
-                return WeatherContract.CurrentForecastEntry.CONTENT_ITEM_TYPE;
+                return WeatherContract.CurrentWeatherEntry.CONTENT_ITEM_TYPE;
             case WEATHER_WITH_LOCATION:
-                return WeatherContract.CurrentForecastEntry.CONTENT_TYPE;
+                return WeatherContract.CurrentWeatherEntry.CONTENT_TYPE;
             case WEATHER:
-                return WeatherContract.CurrentForecastEntry.CONTENT_TYPE;
+                return WeatherContract.CurrentWeatherEntry.CONTENT_TYPE;
             case LOCATION:
                 return WeatherContract.LocationEntry.CONTENT_TYPE;
             default:
@@ -179,7 +179,7 @@ public class WeatherProvider extends ContentProvider {
             // "weather"
             case WEATHER: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-                        WeatherContract.CurrentForecastEntry.TABLE_NAME,
+                        WeatherContract.CurrentWeatherEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -222,9 +222,9 @@ public class WeatherProvider extends ContentProvider {
         switch (match) {
             case WEATHER: {
                 normalizeDate(values);
-                long _id = db.insert(WeatherContract.CurrentForecastEntry.TABLE_NAME, null, values);
+                long _id = db.insert(WeatherContract.CurrentWeatherEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
-                    returnUri = WeatherContract.CurrentForecastEntry.buildCurrentForecastUri(_id);
+                    returnUri = WeatherContract.CurrentWeatherEntry.buildCurrentForecastUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -254,7 +254,7 @@ public class WeatherProvider extends ContentProvider {
         switch (match) {
             case WEATHER:
                 rowsDeleted = db.delete(
-                        WeatherContract.CurrentForecastEntry.TABLE_NAME, selection, selectionArgs);
+                        WeatherContract.CurrentWeatherEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case LOCATION:
                 rowsDeleted = db.delete(
@@ -272,9 +272,9 @@ public class WeatherProvider extends ContentProvider {
 
     private void normalizeDate(ContentValues values) {
         // normalize the date value
-        if (values.containsKey(WeatherContract.CurrentForecastEntry.COLUMN_DATE)) {
-            long dateValue = values.getAsLong(WeatherContract.CurrentForecastEntry.COLUMN_DATE);
-            values.put(WeatherContract.CurrentForecastEntry.COLUMN_DATE, WeatherContract.normalizeDate(dateValue));
+        if (values.containsKey(WeatherContract.CurrentWeatherEntry.COLUMN_DATE)) {
+            long dateValue = values.getAsLong(WeatherContract.CurrentWeatherEntry.COLUMN_DATE);
+            values.put(WeatherContract.CurrentWeatherEntry.COLUMN_DATE, WeatherContract.normalizeDate(dateValue));
         }
     }
 
@@ -288,7 +288,7 @@ public class WeatherProvider extends ContentProvider {
         switch (match) {
             case WEATHER:
                 normalizeDate(values);
-                rowsUpdated = db.update(WeatherContract.CurrentForecastEntry.TABLE_NAME, values, selection,
+                rowsUpdated = db.update(WeatherContract.CurrentWeatherEntry.TABLE_NAME, values, selection,
                         selectionArgs);
                 break;
             case LOCATION:
@@ -315,7 +315,7 @@ public class WeatherProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         normalizeDate(value);
-                        long _id = db.insert(WeatherContract.CurrentForecastEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(WeatherContract.CurrentWeatherEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
