@@ -1,6 +1,7 @@
 package com.twny.tonyn.weatherapp.Utility;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,8 @@ import java.util.Scanner;
  */
 
 public class NetworkUtils {
+
+    public static final String TAG = "NetworkUtils";
 
     final static String BASE_URL =
             "http://samples.openweathermap.org/data/2.5/weather?";
@@ -30,6 +33,7 @@ public class NetworkUtils {
         URL url = null;
         try {
             url = new URL(builtUri.toString());
+            Log.d(TAG, url.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

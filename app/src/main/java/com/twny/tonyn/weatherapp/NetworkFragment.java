@@ -134,6 +134,7 @@ public class NetworkFragment extends Fragment {
                                 && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
                     // If no connectivity, cancel task and update Callback with null data.
                     mCallBack.updateFromDownload(null);
+                    mCallback.onProgressUpdate(-1,0);
                     cancel(true);
                 } else {
                     mCallback.onProgressUpdate(0,0);

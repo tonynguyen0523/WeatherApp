@@ -1,33 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    tools:context="com.twny.tonyn.weatherapp.ForecastFragment">
 
-    <Button
-        android:id="@+id/test_button"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="75dp"
+            tools:text="Hollywood"/>
+
+        <TextView
+            android:id="@+id/data_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="@string/data_error"/>
+
+        <TextView
+        android:id="@+id/current_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        tools:text="75"/>
+
+        <TextView
+        android:id="@+id/main_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="Rainy"/>
+
+        <ImageView
+        android:id="@+id/weather_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"/>
-    <TextView
-        android:id="@+id/test_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_gravity="center"
+        tools:src="@drawable/art_rain"/>
 
+        </LinearLayout>
 
-
-
-<!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/fragment_forecast"-->
-    <!--android:name="com.twny.tonyn.weatherapp.ForecastFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context="com.twny.tonyn.weatherapp.ForecastFragment"/>-->
+</FrameLayout>
 
 
 

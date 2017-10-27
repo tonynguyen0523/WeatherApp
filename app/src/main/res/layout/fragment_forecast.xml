@@ -40,28 +40,28 @@
             android:gravity="center"
             android:text="@string/data_error"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/current_temperature"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="50sp"-->
-            <!--android:textStyle="bold"-->
-            <!--tools:text="75"/>-->
+        <TextView
+            android:id="@+id/current_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            tools:text="75"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/main_description"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--tools:text="Rainy"/>-->
+        <TextView
+            android:id="@+id/main_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Rainy"/>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/weather_icon"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--tools:src="@drawable/art_rain"/>-->
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:src="@drawable/art_rain"/>
 
     </FrameLayout>
 
